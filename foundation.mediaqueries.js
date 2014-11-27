@@ -122,10 +122,10 @@
 
 			$(window)
 				.on('resize.fndtn.mediaqueries', self.throttle(function () {
+					
 					var currMediaHash = self.get_media_hash();
-					if (currMediaHash !== prevMediaHash) {
-						self.resize(currMediaHash);
-					}
+					
+					self.resize(currMediaHash !== prevMediaHash);
 					prevMediaHash = currMediaHash;
 				}, 50));
 
@@ -136,10 +136,10 @@
 		 * Here we're taking care of the js manipulation based on which screen size we're on
 		 * 
 		 */
-		resize : function () {
+		resize : function (statechanged) {
 			var size = this.get_current_size();
 			var orientation = this.get_current_orientation();
-			this.actions(size, orientation);
+			this.actions(size, orientation, statechanged);
 		}
 		
 
